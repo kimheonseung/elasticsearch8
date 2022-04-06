@@ -1,0 +1,71 @@
+[
+    {
+        "sample-log": {
+            "order": 0,
+            "index_patterns": [
+                "sample-log_*"
+            ],
+            "settings": {
+                "index": {
+                    "number_of_shards": "3",
+                    "number_of_replicas": "1"
+                }
+            },
+            "mappings": {
+                "properties": {
+                    "ip": {
+                        "type": "keyword"
+                    },
+                    "equipName": {
+                        "type": "keyword"
+                    },
+                    "logPath": {
+                        "type": "keyword"
+                    },
+                    "logName": {
+                        "type": "keyword"
+                    },
+                    "log": {
+                        "type": "keyword"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "sample-event": {
+            "order": 0,
+            "index_patterns": [
+                "sample-event_*"
+            ],
+            "settings": {
+                "index": {
+                    "number_of_shards": "3",
+                    "number_of_replicas": "1"
+                }
+            },
+            "mappings": {
+                "properties": {
+                    "who": {
+                        "type": "keyword"
+                    },
+                    "when": {
+                        "type": "keyword"
+                    },
+                    "where": {
+                        "type": "keyword"
+                    },
+                    "what": {
+                        "type": "keyword"
+                    },
+                    "how": {
+                        "type": "keyword"
+                    },
+                    "why": {
+                        "type": "keyword"
+                    }
+                }
+            }
+        }
+    }
+]

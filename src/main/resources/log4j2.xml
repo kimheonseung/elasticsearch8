@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configuration>
+<Configuration status="INFO">
+	<Properties>
+		<Property name="logNm">ex-es8</Property>
+		<Property name="layoutPattern">[%d{HH:mm:ss}] [%5p] [%C{1}(%M:%3L)] :%m%n
+		</Property>
+		<Property name="queryPattern">[QUERY]    %m%n
+		</Property>
+		<Property name="resultsetPattern">[RESULT]    %m%n
+		</Property>
+	</Properties>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${layoutPattern}" />
+		</Console>
+		<Console name="query" target="SYSTEM_OUT">
+			<PatternLayout pattern="${queryPattern}" />
+		</Console>
+		<Console name="resultset" target="SYSTEM_OUT">
+			<PatternLayout pattern="${resultsetPattern}" />
+		</Console>
+		<RollingFile name="file" fileName="./logs/${logNm}.log" filePattern="./logs/${logNm}.log.%d{yyyy-MM-dd}">
+			<PatternLayout pattern="${layoutPattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true" interval="1" /><!-- 일별 로그 파일 생성 -->
+			</Policies>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+
+		<Root level="info" additivity="false">
+			<AppenderRef ref="console" />
+			<!-- <AppenderRef ref="file" /> -->
+		</Root>
+
+		<Logger name="org.quartz" level="error" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="org.elasticsearch" level="error" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="com.zaxxer.hikari" level="fatal" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<logger name="run" level="info" />
+		<logger name="debug" level="debug" />
+		<logger name="error" level="error" />
+		
+		<Logger name="jdbc.sqlonly" level="debug" additivity="false">
+			<AppenderRef ref="query" />
+		</Logger>
+		<Logger name="jdbc.sqltiming" level="off" additivity="false">
+			<AppenderRef ref="query" />
+		</Logger>
+		<Logger name="jdbc.audit" level="off" additivity="false">
+			<AppenderRef ref="query" />
+		</Logger>
+		<Logger name="jdbc.resultset" level="off" additivity="false">
+			<AppenderRef ref="query" />
+		</Logger>
+		<Logger name="jdbc.resultsettable" level="debug" additivity="false">
+			<AppenderRef ref="resultset" />
+		</Logger>
+		<Logger name="jdbc.connection" level="off" additivity="false">
+			<AppenderRef ref="query" />
+		</Logger>
+	</Loggers>
+</Configuration>

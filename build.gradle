@@ -1,0 +1,100 @@
+plugins {
+	// Apply the java-library plugin to add support for Java Library
+	id 'java'
+	id 'maven-publish'
+	id "com.github.johnrengelman.shadow" version "7.1.0"
+	id 'org.springframework.boot' version '2.5.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+group = 'com.devh.example'
+version = 'v1'
+sourceCompatibility = '8'
+
+publishing {
+	publications {
+		shadow(MavenPublication) {
+		groupId = 'com.devh.example'
+		artifactId = 'elasticsearch8'
+		version = 'v3'
+			
+		from components.java
+		}
+ 	}
+}
+
+shadowJar {
+	destinationDir = file('./package')
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile){
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+	/* SpringBoot */
+	implementation ('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	implementation ('org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	
+	/* Lombok */
+	compileOnly 'org.projectlombok:lombok:1.18.22'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+	testCompileOnly 'org.projectlombok:lombok:1.18.22'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+	/* Elasticsearch */
+	implementation 'co.elastic.clients:elasticsearch-java:8.1.1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+    // Needed only if you use the spring-dependency-management
+    // and spring-boot Gradle plugins
+    implementation 'jakarta.json:jakarta.json-api:2.0.1' 
+    
+	/* Log4j2 */
+	implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
+	implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
+	implementation 'org.apache.logging.log4j:log4j-web:2.17.0'
+	
+	/* Log4j2 - Slf4j Binding */
+	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.0'
+	/* Elasticsearch Commons logging - log4j adapter */
+	implementation 'org.apache.logging.log4j:log4j-jcl:2.17.0'
+	/* Embedded Tomcat Log */
+	implementation ('org.slf4j:jul-to-slf4j:1.7.32') {
+		exclude group: 'org.slf4j', module: 'slf4j-api'
+	}
+    
+	/* JSON */
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+	
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	
+	/* Swagger */
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	
+}
+
+tasks.named('test') {
+	exclude '**/**'
+}
+

@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "de302666-3309-f28f-cca9-2fcb3acd70b1",
+		"name": "elasticsearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[GET] aggregation/sample",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/aggregation/sample-log?fromMillis=1648303178000&aggregation=true&aggregationField=equipName,logName&aggregationTopN=5,10&aggregationType=term,term",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"aggregation",
+						"sample-log"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fromMillis",
+							"value": "1648303178000"
+						},
+						{
+							"key": "equipName",
+							"value": "Cisco ASA",
+							"disabled": true
+						},
+						{
+							"key": "equipNameOperator",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "logPath",
+							"value": "Cisco/ASA-5-751025",
+							"disabled": true
+						},
+						{
+							"key": "logPathOperator",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "logNameOperator",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "logName",
+							"value": "MAP translation from private:10.249.82.203/45180-public:[2001::56:9b01:a614:aa9c:e841]/26097",
+							"disabled": true
+						},
+						{
+							"key": "aggregation",
+							"value": "true"
+						},
+						{
+							"key": "aggregationField",
+							"value": "equipName,logName"
+						},
+						{
+							"key": "aggregationTopN",
+							"value": "5,10"
+						},
+						{
+							"key": "aggregationType",
+							"value": "term,term"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] groupby/field",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/groupby/field?aggregationField=equipName&fromMillis=1648303178000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"groupby",
+						"field"
+					],
+					"query": [
+						{
+							"key": "aggregationField",
+							"value": "equipName"
+						},
+						{
+							"key": "fromMillis",
+							"value": "1648303178000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] index/create/sample",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/index/create/sample",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"index",
+						"create",
+						"sample"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] index/delete/sample",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/index/delete/sample",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"index",
+						"delete",
+						"sample"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] index/list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/index/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"index",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] search/sample",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/search/sample-log?fromMillis=1648303178000&ip=192.168.100.1,192.168.100.2&ipOperator=eq,eq&page=2&pageSize=5&rows=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"search",
+						"sample-log"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fromMillis",
+							"value": "1648303178000"
+						},
+						{
+							"key": "equipName",
+							"value": "Cisco ASA",
+							"disabled": true
+						},
+						{
+							"key": "equipNameOperator",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "logPath",
+							"value": "Cisco/ASA-5-751025",
+							"disabled": true
+						},
+						{
+							"key": "logPathOperator",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "logNameOperator",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "logName",
+							"value": "MAP translation from private:10.249.82.203/45180-public:[2001::56:9b01:a614:aa9c:e841]/26097",
+							"disabled": true
+						},
+						{
+							"key": "ip",
+							"value": "192.168.100.1,192.168.100.2"
+						},
+						{
+							"key": "ipOperator",
+							"value": "eq,eq"
+						},
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "rows",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] template/update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/template/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"template",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

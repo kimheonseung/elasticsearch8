@@ -1,0 +1,73 @@
+version: '3.7'
+
+services:
+  es00:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.1
+    container_name: ${MASTER}
+    environment:
+      - node.name=${MASTER}
+      - cluster.name=${CLUSTER_NAME}
+      - discovery.seed_hosts=${NODE1},${NODE2}
+      - cluster.initial_master_nodes=${MASTER},${NODE1},${NODE2}
+      - network.host=0.0.0.0
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms${MEMORY}m -Xmx${MEMORY}m"
+    volumes:
+      - ${DATA_MASTER}:/usr/share/elasticsearch/data
+      # - ${LOG_MASTER}:/usr/share/elasticsearch/logs
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - '${HTTP_PORT}:9200'
+      - '${TRANSPORT_PORT}:9300'
+    networks:
+      - elastic
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.1
+    container_name: ${NODE1}
+    environment:
+      - node.name=${NODE1}
+      - cluster.name=${CLUSTER_NAME}
+      - discovery.seed_hosts=${MASTER},${NODE2}
+      - cluster.initial_master_nodes=${MASTER},${NODE1},${NODE2}
+      - network.host=0.0.0.0
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms${MEMORY}m -Xmx${MEMORY}m"
+    volumes:
+      - ${DATA_NODE1}:/usr/share/elasticsearch/data
+      # - ${LOG_NODE1}:/usr/share/elasticsearch/logs
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - elastic
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.1
+    container_name: ${NODE2}
+    environment:
+      - node.name=${NODE2}
+      - cluster.name=${CLUSTER_NAME}
+      - discovery.seed_hosts=${MASTER},${NODE1}
+      - cluster.initial_master_nodes=${MASTER},${NODE1},${NODE2}
+      - network.host=0.0.0.0
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms${MEMORY}m -Xmx${MEMORY}m"
+    volumes:
+      - ${DATA_NODE2}:/usr/share/elasticsearch/data
+      # - ${LOG_NODE2}:/usr/share/elasticsearch/logs
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - elastic
+      
+networks:
+  elastic:
+    external: true

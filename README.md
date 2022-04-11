@@ -34,3 +34,4 @@ http://localhost:8088/swagger-ui.html
 
 ### 샘플 데이터 생성 시 주의점
 - jar 파일과 동일한 경로에 testlog.json 파일이 있어야함
+- testlog.json.zip 압축해제 후 json 파일의 이름을 testlog.json으로 변경

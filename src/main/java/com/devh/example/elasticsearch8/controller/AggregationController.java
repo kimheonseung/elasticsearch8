@@ -63,21 +63,21 @@ public class AggregationController {
 				required = true,
 				dataType = "string",
 				paramType = "query",
-				defaultValue = "term,term",
+				defaultValue = "term,term,time",
 				value = "집계타입"),
 		@ApiImplicitParam(
 				name = "aggregationField", 
 				required = true,
 				dataType = "string",
 				paramType = "query",
-				defaultValue = "equipName,logName",
+				defaultValue = "equipName,logName,timeMillis",
 				value = "집계필드"),
 		@ApiImplicitParam(
 				name = "aggregationTopN", 
 				required = true,
 				dataType = "string",
 				paramType = "query",
-				defaultValue = "5,10",
+				defaultValue = "5,10,10",
 				value = "집계 탑 갯수"),
 	})
 	public ApiResponse<Map<String, List<AggregationVO>>> getSampleLog(@ApiIgnore SampleLogSearchVO sampleLogSearchVO) {

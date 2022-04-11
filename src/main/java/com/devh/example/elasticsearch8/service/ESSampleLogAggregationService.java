@@ -1,27 +1,27 @@
 package com.devh.example.elasticsearch8.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import co.elastic.clients.elasticsearch._types.ElasticsearchException;
-import org.springframework.stereotype.Service;
-
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
+import co.elastic.clients.elasticsearch._types.aggregations.CalendarInterval;
+import co.elastic.clients.elasticsearch._types.aggregations.DateHistogramAggregate;
+import co.elastic.clients.elasticsearch._types.aggregations.StringTermsAggregate;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
 import com.devh.example.elasticsearch8.component.ESClientService;
 import com.devh.example.elasticsearch8.exception.ESSearchException;
 import com.devh.example.elasticsearch8.vo.SampleLogVO;
 import com.devh.example.elasticsearch8.vo.SearchCommonVO;
 import com.devh.example.elasticsearch8.vo.SearchResultVO;
 import com.devh.example.elasticsearch8.vo.SearchResultVO.AggregationVO;
-
-import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
-import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
-import co.elastic.clients.elasticsearch._types.aggregations.StringTermsAggregate;
-import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import co.elastic.clients.elasticsearch.core.SearchResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * <pre>
@@ -97,6 +97,17 @@ public class ESSampleLogAggregationService extends AbstractESSearchService<Sampl
 											)
 									)); 
 					break;
+				case "time":
+					aggregationMap.put(
+							"time",
+							Aggregation.of(a -> a
+								.dateHistogram(d -> d
+									.field(aggregationField)
+									.calendarInterval(CalendarInterval.Day)
+								)
+							)
+					);
+					break;
 
 				default:
 					break;
@@ -131,6 +142,15 @@ public class ESSampleLogAggregationService extends AbstractESSearchService<Sampl
 					aggregationVOList.add(aggregationVO);
 				});
 				
+			} else if(aggregate.isDateHistogram()) {
+				final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				final DateHistogramAggregate dateHistogramAggregate = aggregate.dateHistogram();
+				dateHistogramAggregate.buckets().array().forEach(b -> {
+					AggregationVO aggregationVO = new AggregationVO();
+					aggregationVO.setKey(sdf.format(b.key().toEpochMilli()));
+					aggregationVO.setDocCount(b.docCount());
+					aggregationVOList.add(aggregationVO);
+				});
 			}
 			
 			aggregationMap.put(entry.getKey(), aggregationVOList);

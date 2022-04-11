@@ -99,7 +99,7 @@ public class ESSampleLogAggregationService extends AbstractESSearchService<Sampl
 					break;
 				case "time":
 					aggregationMap.put(
-							"time",
+							String.format("%s_%s_%d", aggregationField, aggregationType, aggregationTopN),
 							Aggregation.of(a -> a
 								.dateHistogram(d -> d
 									.field(aggregationField)

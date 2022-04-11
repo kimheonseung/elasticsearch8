@@ -32,7 +32,7 @@
 
 		<Root level="info" additivity="false">
 			<AppenderRef ref="console" />
-			<!-- <AppenderRef ref="file" /> -->
+			 <AppenderRef ref="file" />
 		</Root>
 
 		<Logger name="org.quartz" level="error" additivity="false">

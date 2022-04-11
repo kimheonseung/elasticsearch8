@@ -9,8 +9,12 @@
 ### 2. 주요 코드
 - [서비스 로직](https://github.com/kimheonseung/elasticsearch8/tree/master/src/main/java/com/devh/example/elasticsearch8/service)
 - [API 공통코드](https://github.com/kimheonseung/elasticsearch8/tree/master/src/main/java/com/devh/example/elasticsearch8/api)
-  
-### 3. 빌드
+
+### 3. API 테스트 및 쿼리 로그 모니터링
+- http://localhost:8088/swagger-ui.html (구동 후 API Spec 확인)
+- [검색 및 차트 화면 샘플](https://github.com/kimheonseung/elasticsearch8/tree/master/react-app)
+
+### 4. 빌드와 구동 및 주의사항
 ```shell
 # Linux
 chomd +x ./gradlew
@@ -22,16 +26,7 @@ java -jar elasticsearch8-v1.jar
 ./graldew.bat bootjar
 cd .\build\libs
 java -jar elasticsearch8-v1.jar
+
+# testlog.json.zip 압축해제 후 testlog.json 파일을 jar 파일과 동일한 경로에 위치
 ```
   
-### API 테스트 및 쿼리 로그 모니터링
-```shell
-# Swagger 라이브러리로 작성된 API 명세서
-http://localhost:8088/swagger-ui.html
-
-# 각 API 요청 후 프로그램 로그에 쿼리 로깅
-```
-
-### 샘플 데이터 생성 시 주의점
-- jar 파일과 동일한 경로에 testlog.json 파일이 있어야함
-- testlog.json.zip 압축해제 후 json 파일의 이름을 testlog.json으로 변경

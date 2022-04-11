@@ -17,4 +17,4 @@ npm start
 ![검색](https://github.com/kimheonseung/elasticsearch8/blob/master/react-app/screenshots/search.png)  
   
 ### 통계 화면  
-![통계](https://github.com/kimheonseung/elasticsearch8/blob/master/react-app/screenshots/search.png)
+![통계](https://github.com/kimheonseung/elasticsearch8/blob/master/react-app/screenshots/statistics.png)

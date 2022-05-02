@@ -40,6 +40,8 @@ public class SampleLogVO extends AbstractLogVO {
 	public static final String LOG_NAME = "logName";
 	@JsonIgnore
 	public static final String LOG = "log";
+	@JsonIgnore
+	public static final String ORIGINAL_LOG = "originalLog";
 	
 	
 	private String ip;
@@ -47,6 +49,7 @@ public class SampleLogVO extends AbstractLogVO {
 	private String logPath;
 	private String logName;
 	private String log;
+	private String originalLog;
 	
 	@Override
 	public String getIndexName() {

@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import co.elastic.clients.elasticsearch.core.search.HighlightField;
 import com.devh.example.elasticsearch8.exception.ESSearchException;
 import com.devh.example.elasticsearch8.util.ExceptionUtils;
 import com.devh.example.elasticsearch8.vo.SearchCommonVO;
@@ -149,6 +150,27 @@ public abstract class AbstractESSearchService<T> {
                                     .must(queryList)
                             )
                     )
+                    .highlight(h -> {
+                        if(searchCommonVO.isHighlight()) {
+                            for(int idx = 0 ; idx < searchCommonVO.getHighlightField().length ; ++idx) {
+                                final String field = searchCommonVO.getHighlightField()[idx];
+                                final String keyword = searchCommonVO.getHighlightKeyword()[idx];
+                                h
+                                .fields(field, HighlightField.of(hf -> hf
+                                        .preTags("@")
+                                        .postTags("@")
+                                        .highlightQuery(hq -> hq
+                                                .term(tq -> tq
+                                                        .field(field)
+                                                        .value(keyword)
+                                                )
+                                        )
+                                ))
+                                .fragmentSize(1024);
+                            }
+                        }
+                        return h;
+                    })
                     .aggregations(parseAggregation(searchCommonVO))
             );
 

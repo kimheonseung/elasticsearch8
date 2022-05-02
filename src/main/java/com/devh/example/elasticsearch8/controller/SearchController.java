@@ -122,6 +122,24 @@ public class SearchController {
 				dataType = "string",
 				paramType = "query",
 				value = "끝 밀리세컨 (기본 현재시간)"),
+		@ApiImplicitParam(
+				name = "highlight",
+				dataType = "boolean",
+				paramType = "query",
+				defaultValue = "true",
+				value = "Whether to highlight"),
+		@ApiImplicitParam(
+				name = "highlightField",
+				dataType = "string",
+				paramType = "query",
+				defaultValue = "originalLog",
+				value = "Which field to highlight (originalLog is keyword field which is suitable for term query to highlight"),
+		@ApiImplicitParam(
+				name = "highlightKeyword",
+				dataType = "string",
+				paramType = "query",
+				defaultValue = "program",
+				value = "Which keyword to highlight"),
 	})
 	public ApiResponse<SampleLogVO> getSampleLog(@ApiIgnore SampleLogSearchVO sampleLogSearchVO) {
 		try {

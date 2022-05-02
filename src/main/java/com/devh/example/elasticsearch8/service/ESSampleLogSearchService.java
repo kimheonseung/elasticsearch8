@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import co.elastic.clients.elasticsearch.core.search.Highlight;
 import org.springframework.stereotype.Service;
 
 import com.devh.example.elasticsearch8.api.vo.PagingVO;
@@ -227,7 +228,17 @@ public class ESSampleLogSearchService extends AbstractESSearchService<SampleLogV
 	protected SearchResultVO<SampleLogVO> parseResponse(SearchResponse<SampleLogVO> res, SearchCommonVO searchCommonVO, long total) {
 		List<SampleLogVO> list = new ArrayList<SampleLogVO>();
 		res.hits().hits().forEach(h -> {
-			list.add(h.source());
+			SampleLogVO sampleLogVO = h.source();
+			if(sampleLogVO != null) {
+				for(String highlightKey : h.highlight().keySet()) {
+					if(SampleLogVO.ORIGINAL_LOG.equals(highlightKey)) {
+						StringBuilder sbHighlightedOriginalLog = new StringBuilder();
+						h.highlight().get(highlightKey).forEach(sbHighlightedOriginalLog::append);
+						sampleLogVO.setOriginalLog(sbHighlightedOriginalLog.toString());
+					}
+				}
+				list.add(h.source());
+			}
 		});
 		
 		SearchResultVO<SampleLogVO> searchResultVO = new SearchResultVO<SampleLogVO>();

@@ -34,4 +34,7 @@ public abstract class SearchCommonVO {
 	private String[] aggregationField = new String[] {};
 	private int[] aggregationTopN = new int[] { 10 };
 	private String[] aggregationInterval = new String[] {};
+	private boolean highlight = false;
+	private String[] highlightField = new String[] {};
+	private String[] highlightKeyword = new String[] {};
 }

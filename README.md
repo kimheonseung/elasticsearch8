@@ -7,7 +7,7 @@
 - Springboot 2.5.3
   
 ### 2. Core Code
-- [Service Login](https://github.com/kimheonseung/elasticsearch8/tree/master/src/main/java/com/devh/example/elasticsearch8/service)
+- [Service Logic](https://github.com/kimheonseung/elasticsearch8/tree/master/src/main/java/com/devh/example/elasticsearch8/service)
 - [API Common Code](https://github.com/kimheonseung/elasticsearch8/tree/master/src/main/java/com/devh/example/elasticsearch8/api)
 
 ### 3. API Test & Query log Monitoring

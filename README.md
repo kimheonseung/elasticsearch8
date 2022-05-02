@@ -11,7 +11,7 @@
 - [API Common Code](https://github.com/kimheonseung/elasticsearch8/tree/master/src/main/java/com/devh/example/elasticsearch8/api)
 
 ### 3. API Test & Query log Monitoring
-- http://localhost:8088/swagger-ui.html (구동 후 API Spec 확인)
+- http://localhost:8088/swagger-ui.html (API Spec)
 - [Search, Chart Sample FE](https://github.com/kimheonseung/elasticsearch8/tree/master/react-app)
 
 ### 4. How to build & Notice

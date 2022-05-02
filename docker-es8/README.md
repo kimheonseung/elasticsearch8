@@ -1,12 +1,12 @@
 ## Docker for Elasticsearch8
   
-### 1. 버전
+### 1. Version
 - Elasticsearch 8.1.1
   
-### 2. 구성
+### 2. Options
 - [docker-compose.yml (.env 참조)](https://github.com/kimheonseung/elasticsearch8/blob/master/docker-es8/docker-compose.yml)
   
-### 3. 실행
+### 3. How to run
 ```shell
 # Linux
 ./init.sh
@@ -15,5 +15,5 @@
 .\init.bat
 ```
 
-### 특이사항
-- Windows의 경우 WSL 사용 여부와 무관, File Sharing 허용 필요
+### Notince
+- Windows: no matter using WSL. But necessary to File Sharing data directories.
